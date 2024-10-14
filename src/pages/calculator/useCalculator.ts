@@ -7,9 +7,9 @@ import {
   divide,
   percentage,
   negate,
+  formatNumber,
 } from "./utils";
 
-// 自定义 Hook 用于处理计算器的逻辑
 const useCalculator = () => {
   // 状态管理
   const [displayValue, setDisplayValue] = useState<string>("0"); // 显示的当前值
@@ -42,13 +42,22 @@ const useCalculator = () => {
   const handleOperator = (nextOperator: string) => {
     const inputValue = parseFloat(displayValue); // 获取当前输入值
 
+    if (isNaN(inputValue)) {
+      setDisplayValue("Error"); // 输入值为 NaN，显示错误
+      return;
+    }
+
     if (firstOperand === null) {
       // 如果第一个操作数为空，则设置为当前输入值
       setFirstOperand(inputValue);
     } else if (currentOperator) {
       // 如果已经有第一个操作数和当前操作符，进行计算
       const result = performCalculation(currentOperator, firstOperand, inputValue);
-      setDisplayValue(String(result)); // 更新显示值为计算结果
+      if (isNaN(result)) {
+        setDisplayValue("Error"); // 计算结果为 NaN，显示错误
+        return;
+      }
+      setDisplayValue(formatNumber(result)); // 更新显示值为计算结果（格式化）
       setFirstOperand(result); // 将结果设置为新的第一个操作数
     }
 
@@ -74,7 +83,14 @@ const useCalculator = () => {
 
   // 处理百分比操作
   const handlePercentage = () => {
-    setDisplayValue(String(percentage(parseFloat(displayValue)))); // 计算并更新显示值为百分比
+    const inputValue = parseFloat(displayValue);
+    console.log('inputValue', inputValue)
+    if (isNaN(inputValue)) {
+      setDisplayValue("Error"); // 输入值为 NaN，显示错误
+      return;
+    }
+    console.log('percentage(inputValue)', percentage(inputValue))
+    setDisplayValue(formatNumber(percentage(inputValue))); // 计算并更新显示值为百分比（格式化）
   };
 
   // 清空计算器
@@ -89,8 +105,17 @@ const useCalculator = () => {
   const handleEquals = () => {
     if (currentOperator && firstOperand !== null) {
       const secondOperand = parseFloat(displayValue); // 获取第二个操作数
+      if (isNaN(secondOperand)) {
+        setDisplayValue("Error"); // 输入值为 NaN，显示错误
+        setWaitingForSecondOperand(true); // 设置为等待状态，以便下次输入
+        return;
+      }
       const result = performCalculation(currentOperator, firstOperand, secondOperand); // 进行计算
-      setDisplayValue(String(result)); // 更新显示值为计算结果
+      if (isNaN(result)) {
+        setDisplayValue("Error"); // 计算结果为 NaN，显示错误
+      } else {
+        setDisplayValue(formatNumber(result)); // 更新显示值为计算结果（格式化）
+      }
       setFirstOperand(null); // 清空第一个操作数
       setCurrentOperator(null); // 清空当前操作符
       setWaitingForSecondOperand(true); // 设置为等待状态，以便下次输入
@@ -100,7 +125,12 @@ const useCalculator = () => {
   // 处理正负取反
   const handleNegate = () => {
     const currentValue = parseFloat(displayValue); // 获取当前值
-    setDisplayValue(String(negate(currentValue))); // 更新显示值为取反后的值
+    if (isNaN(currentValue)) {
+      setDisplayValue("Error"); // 输入值为 NaN，显示错误
+      setWaitingForSecondOperand(true); // 设置为等待状态，以便下次输入
+      return;
+    }
+    setDisplayValue(formatNumber(negate(currentValue))); // 更新显示值为取反后的值（格式化）
   };
 
   // 返回 Hook 中的状态和函数
