@@ -1,0 +1,87 @@
+.calendar-component {
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 380px;
+  box-sizing: border-box;
+  font-size: 16px;
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 15px;
+    &-info {
+      font-weight: bold;
+      color: #000;
+      font-size: 18px;
+      display: flex;
+      gap: 16px;
+      span {
+        cursor: pointer;
+        &:hover {
+          color: #007BFF;
+        }
+      }
+    }
+    &-btns {
+      display: flex;
+      gap: 16px;
+      div {
+        cursor: pointer;
+        background-color: #fff;
+        color: #007BFF;
+        transition: background-color 0.3s, color 0.3s;
+        padding: 4px 16px;
+        border-radius: 20px;
+        &:hover {
+          background-color: #007BFF;
+          color: white;
+          border: none;
+          outline: none;
+        }
+        &:active {
+          border: none;
+          outline: none;
+        }
+      }
+    }
+  }
+  &-content {
+    padding-top: 15px;
+  }
+  .years-grid, .months-grid, .days-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 10px;
+  }
+  .days-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .year-item, .month-item, .day-item {
+    cursor: pointer;
+    text-align: center;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+  }
+
+  .week-item {
+    height: 30px;
+    color: #999;
+  }
+
+  .year-item.selected, .month-item.selected, .day-item.selected {
+    color: #007BFF;
+  }
+  .day-item.selected {
+    border-radius: 50%;
+    background-color: #007BFF;
+    color: white;
+  }
+
+}
