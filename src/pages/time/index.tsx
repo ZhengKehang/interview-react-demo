@@ -7,7 +7,6 @@ const Index = React.memo(() => {
   const {data, refresh} = useRequest(getServerTime);
   // 每秒刷新一次，todo 不用每次都取服务器时间，第一次取好作为基准就可以了
   const clear = useRafInterval(() => {
-    clear();
     refresh();
   }, 1000);
   useEffect(() => {
