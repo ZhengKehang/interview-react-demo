@@ -47,6 +47,12 @@ const useCalculator = () => {
       return;
     }
 
+    // 如果有 currentOperator，并且还在等待第二个操作数，直接更新当前操作符，而不计算
+    if (currentOperator && waitingForSecondOperand) {
+      setCurrentOperator(nextOperator); // 更新操作符
+      return;
+    }
+
     if (firstOperand === null) {
       // 如果第一个操作数为空，则设置为当前输入值
       setFirstOperand(inputValue);

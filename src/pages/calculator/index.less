@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   font-size: 14px;
+  background: #ffffff;
   .calculator {
     width: 300px;
     .calculator-display {
@@ -25,14 +26,17 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      button {
-        font-size: 1.5rem;
+      .calculator-button {
+        font-size: 30px;
         background-color: lightgray;
         border: 1px solid lightgray;
         padding: 10px;
         box-sizing: border-box;
-        &:active, &:focus-visible {
-          border: 1px solid #000;
+        height: 60px;
+        color: #333333;
+        &:hover {
+          color: #333333;
+          border: 1px solid #000000;
         }
       }
     }

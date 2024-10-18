@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Table, Button, Modal, Form, Input, message, Flex} from 'antd';
+import {Table, Button, Modal, Form, Input, message, Flex, InputNumber} from 'antd';
 import { getUsers, putEditUser, postCreateUser, deleteUser, User } from '../../apis'; // 导入请求方法
 import { useRequest } from 'ahooks'; // 导入 useRequest
 import './index.less';
@@ -114,14 +114,18 @@ const UserList: React.FC = () => {
             name="email"
             label="邮箱"
             required
-            rules={[{ required: true, message: '请输入邮箱' }]}>
+            rules={[
+              { required: true, message: '请输入邮箱' },
+              { type: 'email', message: '请输入有效的邮箱格式' },
+            ]}>
             <Input placeholder="请输入邮箱"  />
           </Form.Item>
           <Form.Item
             name="age"
             label="年龄"
-            rules={[{ required: false, message: '请输入年龄' }]}>
-            <Input type="number"  placeholder="请输入年龄"  />
+            required
+            rules={[{ required: true, message: '请输入年龄' }]}>
+            <InputNumber min={1} style={{width: '100%'}}  placeholder="请输入年龄"  />
           </Form.Item>
           <Form.Item>
             <Flex align="center" justify="center">

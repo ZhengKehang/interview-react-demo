@@ -14,8 +14,6 @@ export const multiply = (a: number, b: number): number => {
 };
 
 export const divide = (a: number, b: number): number => {
-  console.log('a', a)
-  console.log('b', b)
   return b !== 0 ? new Decimal(a).div(b).toNumber() : NaN;
 };
 
