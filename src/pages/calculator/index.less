@@ -28,8 +28,12 @@
       button {
         font-size: 1.5rem;
         background-color: lightgray;
-        border: none;
+        border: 1px solid lightgray;
         padding: 10px;
+        box-sizing: border-box;
+        &:active, &:focus-visible {
+          border: 1px solid #000;
+        }
       }
     }
     .zero {

@@ -70,7 +70,7 @@ const Calendar: React.FC<UseCalendar> = (props) => {
             {months.map((month, index) => (
               <div
                 key={month}
-                className={`month-item ${Number(selectedMonth) === index ? 'selected' : ''}`}
+                className={`month-item ${Number(selectedMonth) - 1 === index ? 'selected' : ''}`}
                 onClick={() => selectMonth(dayjs().month(index).format('MM'))}
               >
                 {month}
