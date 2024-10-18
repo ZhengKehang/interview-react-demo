@@ -153,7 +153,7 @@ const dealError = async ({ messge }: any) => {
  */
 requestUtil.instance.interceptors.response.use(
   (response) => {
-    const resp = response.data;
+    const resp = response.data || {};
     console.log('response____', response)
     if (resp.status === 'success') {
       return Promise.resolve(resp);
@@ -164,7 +164,7 @@ requestUtil.instance.interceptors.response.use(
   },
   (error: any) => {
     console.log('error', error)
-    const resp = error?.response?.data
+    const resp = error?.response?.data || {}
     dealError(resp);
     return Promise.reject(error);
   },
