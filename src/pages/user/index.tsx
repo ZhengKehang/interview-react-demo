@@ -12,7 +12,7 @@ const UserList: React.FC = () => {
   const { refresh, data } = useRequest(getUsers, {
     manual: true,
     onError: () => {
-      message.error('获取用户列表失败');
+      console.log('error')
     },
   });
 
@@ -34,8 +34,8 @@ const UserList: React.FC = () => {
     },
     {
       manual: true,
-      onError: () => {
-        message.error('操作失败');
+      onError: (error) => {
+        console.log('error', error)
       },
     }
   );
@@ -50,7 +50,7 @@ const UserList: React.FC = () => {
           message.success('用户删除成功');
           refresh();
         } catch (error) {
-          message.error('删除失败');
+          console.log('error', error)
         }
       },
     });
@@ -75,7 +75,7 @@ const UserList: React.FC = () => {
     { title: 'ID', dataIndex: 'id', key: 'id' },
     { title: '姓名', dataIndex: 'name', key: 'name' },
     { title: '邮箱', dataIndex: 'email', key: 'email' },
-    { title: '年龄', dataIndex: 'age', key: 'age' },
+    { title: '年龄', dataIndex: 'age', key: 'age', render: (d) => d || '--' },
     {
       title: '操作',
       key: 'action',
@@ -123,8 +123,7 @@ const UserList: React.FC = () => {
           <Form.Item
             name="age"
             label="年龄"
-            required
-            rules={[{ required: true, message: '请输入年龄' }]}>
+            rules={[{ required: false, message: '请输入年龄' }]}>
             <InputNumber min={1} style={{width: '100%'}}  placeholder="请输入年龄"  />
           </Form.Item>
           <Form.Item>

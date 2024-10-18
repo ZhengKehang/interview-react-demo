@@ -1,5 +1,6 @@
 import type { AxiosInstance, AxiosRequestConfig, HeadersDefaults, ResponseType } from "axios";
 import axios from "axios";
+import {message as antdMessage} from "antd";
 
 export type QueryParamsType = Record<string | number, any>;
 
@@ -144,8 +145,8 @@ const requestUtil = new HttpClient({
   },
 });
 
-const dealError = async ({ messge }: any) => {
-  console.log('messge', messge)
+const dealError = async ({ message }: any) => {
+  message && antdMessage.error(message)
 };
 
 /**
@@ -154,7 +155,6 @@ const dealError = async ({ messge }: any) => {
 requestUtil.instance.interceptors.response.use(
   (response) => {
     const resp = response.data || {};
-    console.log('response____', response)
     if (resp.status === 'success') {
       return Promise.resolve(resp);
     } else {
@@ -163,7 +163,6 @@ requestUtil.instance.interceptors.response.use(
     }
   },
   (error: any) => {
-    console.log('error', error)
     const resp = error?.response?.data || {}
     dealError(resp);
     return Promise.reject(error);
