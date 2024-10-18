@@ -28,6 +28,18 @@ const routes: RouteObject[] = [
           Component: (await import("../pages/calendar")).default,
         }),
       },
+      {
+        path: "time",
+        lazy: async () => ({
+          Component: (await import("../pages/time")).default,
+        }),
+      },
+      {
+        path: "file",
+        lazy: async () => ({
+          Component: (await import("../pages/file")).default,
+        }),
+      },
     ],
   },
 ];
