@@ -16,6 +16,9 @@ const Index = () => {
         <li>
           <Link to="/file">File</Link>
         </li>
+        <li>
+          <Link to="/user">User manage</Link>
+        </li>
       </ul>
     </div>
   )

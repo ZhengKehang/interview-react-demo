@@ -40,6 +40,12 @@ const routes: RouteObject[] = [
           Component: (await import("../pages/file")).default,
         }),
       },
+      {
+        path: "user",
+        lazy: async () => ({
+          Component: (await import("../pages/user")).default,
+        }),
+      },
     ],
   },
 ];
