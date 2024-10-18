@@ -18,7 +18,9 @@ const Calculator: React.FC = () => {
   return (
     <div className="calculator-page">
       <div className="calculator">
-        <div className="calculator-display">{displayValue}</div>
+        <div className="calculator-display">
+          <div className="calculator-display-text">{displayValue}</div>
+        </div>
         <div className="calculator-keypad">
           <button onClick={() => handleClear()}>AC</button>
           <button onClick={() => handleNegate()}>+/-</button> {/* 正负取反按钮 */}

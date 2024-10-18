@@ -4,15 +4,22 @@
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  font-size: 14px;
   .calculator {
     width: 300px;
     .calculator-display {
       background-color: black;
-      color: white;
-      font-size: 2rem;
-      text-align: right;
       padding: 10px;
       margin-bottom: 10px;
+      .calculator-display-text {
+        white-space: nowrap;
+        text-overflow: clip;
+        font-size: 2rem;
+        text-align: right;
+        color: white;
+        width: 280px;
+        overflow: hidden;
+      }
     }
     .calculator-keypad  {
       display: grid;

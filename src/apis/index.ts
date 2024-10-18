@@ -1,4 +1,4 @@
-import requestUtil, {ContentType} from "../utils/request.ts";
+import requestUtil, {ContentType} from "./request.ts";
 
 export const getServerTime = () => {
   return requestUtil.request({
